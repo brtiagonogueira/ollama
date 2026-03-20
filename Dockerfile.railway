@@ -8,8 +8,6 @@ EXPOSE 11434
 # Railway injects PORT env var; Ollama reads OLLAMA_HOST
 ENV OLLAMA_HOST=0.0.0.0:11434
 
-# Keep models in a persistent volume (mount /root/.ollama in Railway)
-VOLUME ["/root/.ollama"]
-
+# Note: mount /root/.ollama as a Railway Volume for model persistence
 ENTRYPOINT ["/bin/ollama"]
 CMD ["serve"]

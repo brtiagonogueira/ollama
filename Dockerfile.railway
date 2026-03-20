@@ -1,0 +1,15 @@
+# Lightweight Dockerfile for Railway deployment (CPU-only)
+# Uses the official Ollama image as base
+FROM ollama/ollama:latest
+
+# Expose Ollama API port
+EXPOSE 11434
+
+# Railway injects PORT env var; Ollama reads OLLAMA_HOST
+ENV OLLAMA_HOST=0.0.0.0:11434
+
+# Keep models in a persistent volume (mount /root/.ollama in Railway)
+VOLUME ["/root/.ollama"]
+
+ENTRYPOINT ["/bin/ollama"]
+CMD ["serve"]
